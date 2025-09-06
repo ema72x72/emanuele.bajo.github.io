@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emanuele Bajo — Research & Publications</title>
+    <meta name="description" content="Full Professor of Finance at University of Bologna. Research in IPO, Household Finance, Corporate Risk Management.">
+    <meta property="og:title" content="Emanuele Bajo — Research & Publications">
+    <meta property="og:description" content="Full Professor of Finance at University of Bologna. Research in IPO, Household Finance, Corporate Risk Management.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Scroll spy
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Copy email
+            const copyEmail = document.getElementById('copy-email');
+            if (copyEmail) {
+                copyEmail.addEventListener('click', () => {
+                    navigator.clipboard.writeText('emanuele.bajo@unibo.it');
+                    copyEmail.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyEmail.textContent = 'Copy';
+                    }, 2000);
+                });
+            }
+
+            // Search publications
+            const searchInput = document.getElementById('search-pubs');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    const pubs = document.querySelectorAll('#publications-list li');
+                    
+                    pubs.forEach(pub => {
+                        const text = pub.textContent.toLowerCase();
+                        pub.style.display = text.includes(query) ? 'block' : 'none';
+                    });
+                });
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --text: #1a1a1a;
+            --bg: #ffffff;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
+            --card-bg: #f9fafb;
+        }
+        
+        [data-theme="dark"] {
+            --text: #f3f4f6;
+            --bg: #111827;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --gray: #9ca3af;
+            --gray-light: #374151;
+            --card-bg: #1f2937;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: var(--accent-light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header & Nav */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg);
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: background-color 0.3s;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a.active {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .affiliations {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .affiliations span {
+            background-color: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Sections */
+        section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        /* About */
+        .bio {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+        }
+        
+        /* Publications */
+        .search-box {
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.5rem;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: inherit;
+        }
+        
+        #publications-list {
+            list-style: none;
+        }
+        
+        #publications-list li {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        #publications-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .pub-authors {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .pub-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .pub-journal {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pub-link {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        
+        .pub-link:hover {
+            background-color: var(--accent-light);
+            color: white;
+        }
+        
+        /* Working Papers */
+        .wp-intro {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        
+        /* Contact */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .email-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .copy-btn {
+            background-color: var(--card-bg);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--gray-light);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            #publications-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            #publications-list li {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        
+        .skip-link:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        button:focus, input:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body itemscope itemtype="http://schema.org/Person">
+    <a href="#main" class="skip-link">Skip to content</a>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#publications">Publications</a>
+                    <a href="#working-papers">Working Papers</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span>Theme</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <main id="main">
+        <section class="hero">
+            <div class="container">
+                <h1 itemprop="name">Emanuele Bajo</h1>
+                <p itemprop="jobTitle">Full Professor of Finance</p>
+                <div class="affiliations">
+                    <span itemprop="affiliation">University of Bologna (Department of Management)</span>
+                    <span itemprop="affiliation">Bologna Business School (Associate Dean)</span>
+                    <span itemprop="affiliation">Honorary Professor, University of Queensland</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about">
+            <div class="container">
+                <h2>About</h2>
+                <div class="bio">
+                    <p>“Emanuele Bajo is Full Professor of Finance at the University of Bologna and Associate Dean at the University of Bologna Business School (BBS). He is also Director of the Master in Finance and Fintech and Honorary Professor at the University of Queensland (Australia). In the past he has been Adjunct Professor at the Johns Hopkins University, San Diego State University and Visiting Researcher at Boston College. He is also member of the Consultative Working Group of the Risk Standing Committee of ESMA.</p>
+                    <p>His research interests and major publications are mainly related to IPO, Household Finance and Corporate Risk Management. He has published numerous articles in prestigious finance journals (among others, Journal of Financial Economics, Journal of Corporate Finance and Journal of Banking and Finance) and two books (Convertible Bonds and Corporate Risk Management). He is the Executive Editor of the Journal of Economics and Business.”</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="publications">
+            <div class="container">
+                <h2>Publications (Selected)</h2>
+                <div class="search-box">
+                    <input type="text" id="search-pubs" placeholder="Search publications..." aria-label="Search publications">
+                </div>
+                <ul id="publications-list">
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Barbi, M.; Bigelli, M.</div>
+                        <div class="pub-year" itemprop="datePublished">(2025)</div>
+                        <div class="pub-title" itemprop="headline">Back From the Brink: State‐Guaranteed Loans and Financial Recovery.</div>
+                        <div class="pub-journal" itemprop="isPartOf">European Financial Management, online first.</div>
+                        <a href="https://cris.unibo.it/handle/11585/1060712" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Barbi, M.; Sandri, S.</div>
+                        <div class="pub-year" itemprop="datePublished">(2024)</div>
+                        <div class="pub-title" itemprop="headline">Finanza aziendale: problemi, esercizi, domande.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Maggioli Editore, Rimini, pp. 224.</div>
+                        <a href="https://cris.unibo.it/handle/11585/1047808" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Barbi, M.; Hillier, D.</div>
+                        <div class="pub-year" itemprop="datePublished">(2024)</div>
+                        <div class="pub-title" itemprop="headline">Gender balance in academia: Evidence from finance departments.</div>
+                        <div class="pub-journal" itemprop="isPartOf">International Review of Financial Analysis, 96, 103532.</div>
+                        <a href="https://cris.unibo.it/handle/11585/1027955" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Randl, O.; Simion, G.</div>
+                        <div class="pub-year" itemprop="datePublished">(2024)</div>
+                        <div class="pub-title" itemprop="headline">I will trade, just not today: Individual investor trading activity around birthdays.</div>
+                        <div class="pub-journal" itemprop="isPartOf">European Financial Management, 30, 2164–2194.</div>
+                        <a href="https://cris.unibo.it/handle/11585/1007321" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Cecchini, M.; Oliver, B.</div>
+                        <div class="pub-year" itemprop="datePublished">(2023)</div>
+                        <div class="pub-title" itemprop="headline">Psychological profile and investment decisions.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Finance Research Letters, 58, 104245.</div>
+                        <a href="https://cris.unibo.it/handle/11585/900030" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Jankensgård, H.; Marinelli, N.</div>
+                        <div class="pub-year" itemprop="datePublished">(2022)</div>
+                        <div class="pub-title" itemprop="headline">Me, myself and I: CEO narcissism and selective hedging.</div>
+                        <div class="pub-journal" itemprop="isPartOf">European Financial Management, 28, 809–833.</div>
+                        <a href="https://cris.unibo.it/handle/11585/837896" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Barbi, M.; Bigelli, M.; Croci, E.</div>
+                        <div class="pub-year" itemprop="datePublished">(2020)</div>
+                        <div class="pub-title" itemprop="headline">Bolstering Family Control: Evidence from Loyalty Shares.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Corporate Finance, 65, 101755.</div>
+                        <a href="https://cris.unibo.it/handle/11585/717965" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Croci, E.; Marinelli, N.</div>
+                        <div class="pub-year" itemprop="datePublished">(2020)</div>
+                        <div class="pub-title" itemprop="headline">Institutional investor networks and firm value.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Business Research, 112, 65–80.</div>
+                        <a href="https://cris.unibo.it/handle/11585/722944" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Bigelli, M.; Raimondo, C.</div>
+                        <div class="pub-year" itemprop="datePublished">(2020)</div>
+                        <div class="pub-title" itemprop="headline">Ownership ties, conflict of interest, and the tone of news.</div>
+                        <div class="pub-journal" itemprop="isPartOf">European Financial Management, 26, 560–578.</div>
+                        <a href="https://cris.unibo.it/handle/11585/702740" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Barbi, M.; Hillier, D.</div>
+                        <div class="pub-year" itemprop="datePublished">(2020)</div>
+                        <div class="pub-title" itemprop="headline">Where should I publish to get promoted? A finance journal ranking based on business school promotions.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Banking & Finance, 114, 105780.</div>
+                        <a href="https://cris.unibo.it/handle/11585/704113" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Cecchini, M.; Bajo, E.; Russo, P. M.; Sobrero, M.</div>
+                        <div class="pub-year" itemprop="datePublished">(2019)</div>
+                        <div class="pub-title" itemprop="headline">Individual Differences in the Disposition Effect.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Behavioral Finance, 20, 107–126.</div>
+                        <a href="https://cris.unibo.it/handle/11585/654363" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Barbi, M.</div>
+                        <div class="pub-year" itemprop="datePublished">(2018)</div>
+                        <div class="pub-title" itemprop="headline">Financial Illiteracy and Mortgage Refinancing Decisions.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Banking & Finance, 94, 279–296.</div>
+                        <a href="https://cris.unibo.it/handle/11585/623015" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Bajo, E.; Raimondo, C.</div>
+                        <div class="pub-year" itemprop="datePublished">(2017)</div>
+                        <div class="pub-title" itemprop="headline">Media sentiment and IPO underpricing.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Corporate Finance, 46, 139–153.</div>
+                        <a href="https://cris.unibo.it/handle/11585/586455" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                    <li itemscope itemtype="http://schema.org/ScholarlyArticle">
+                        <div class="pub-authors" itemprop="author">Chemmanur, T. J.; Simonyan, K.; Tehranian, H.; Bajo, E.</div>
+                        <div class="pub-year" itemprop="datePublished">(2016)</div>
+                        <div class="pub-title" itemprop="headline">Underwriter Networks, Investor Attention, and IPOs.</div>
+                        <div class="pub-journal" itemprop="isPartOf">Journal of Financial Economics, 122, 376–408.</div>
+                        <a href="https://cris.unibo.it/handle/11585/556241" class="pub-link" itemprop="url">Open</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="working-papers">
+            <div class="container">
+                <h2>Working Papers</h2>
+                <p class="wp-intro">Selected works in progress; full list on request.</p>
+                <ul id="wp-list">
+                    <!-- Will be populated later -->
+                </ul>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="contact-info">
+                    <div class="email-wrapper">
+                        <a href="mailto:emanuele.bajo@unibo.it" itemprop="email">emanuele.bajo@unibo.it</a>
+                        <button id="copy-email" class="copy-btn" aria-label="Copy email address">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div>© <span id="current-year"></span> Emanuele Bajo</div>
+            <div class="footer-links">
+                <a href="https://scholar.google.com/citations?user=..." target="_blank" rel="noopener">Google Scholar</a>
+                <a href="https://www.ssrn.com/author=..." target="_blank" rel="noopener">SSRN</a>
+                <a href="https://orcid.org/..." target="_blank" rel="noopener">ORCID</a>
+                <a href="https://www.bbs.unibo.it" target="_blank" rel="noopener">BBS</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
